@@ -1,0 +1,42 @@
+{
+  "coordinates": {
+    "latitude": -7.672971,
+    "longitude": 109.024851
+  },
+  "date": "2024-02-29T17:00:00.000Z",
+  "calculationParameters": {
+    "madhab": "shafi",
+    "highLatitudeRule": "middleofthenight",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "methodAdjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 1,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "polarCircleResolution": "Unresolved",
+    "rounding": "up",
+    "shafaq": "general",
+    "method": "Singapore",
+    "fajrAngle": 20,
+    "ishaAngle": 18,
+    "ishaInterval": 0,
+    "maghribAngle": 0
+  },
+  "fajr": "2024-02-29T21:31:00.000Z",
+  "sunrise": "2024-02-29T22:49:00.000Z",
+  "dhuhr": "2024-03-01T04:58:00.000Z",
+  "asr": "2024-03-01T07:59:00.000Z",
+  "sunset": "2024-03-01T11:04:00.000Z",
+  "maghrib": "2024-03-01T11:04:00.000Z",
+  "isha": "2024-03-01T12:14:00.000Z"
+}
