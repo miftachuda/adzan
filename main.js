@@ -1,15 +1,12 @@
 const player = require("play-sound")();
 const adhan = require("adhan");
-// Path to your music file
-const musicFile = "adzan.mp3";
-const exp = require("./exap.json");
 const schedule = require("node-schedule");
-function play() {
-  player.play(musicFile, (err) => {
+function play(file) {
+  player.play(file, (err) => {
     if (err) {
-      console.error("Error playing music:", err);
+      console.error("Error playing mp3:", err);
     } else {
-      console.log("Music has finished playing");
+      console.log("Mp3 has finished playing");
     }
   });
 }
@@ -20,19 +17,65 @@ const times = ["fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha"];
 
 function calcPray() {
   const date = new Date();
+
+  if (date.getDay() === 5) {
+    schedule.scheduleJob(
+      prayerTime.setMinutes(date.setHours(11, 0, 0, 0)),
+      function () {
+        play("Juzz30.mp3");
+      }
+    );
+  }
+
   var prayerTimes = new adhan.PrayerTimes(coordinates, date, params);
-  times.forEach((x) => {
-    const date = new Date(prayerTimes[x]);
-    console.log(date);
-    const job = schedule.scheduleJob(date, function () {
-      console.log(`its time to sholat ${x}`);
-      play();
-    });
-  });
   console.log(prayerTimes);
+  times.forEach((x) => {
+    const prayerTime = new Date(prayerTimes[x]);
+    schedule.scheduleJob(prayerTime, function () {
+      console.log(`Its time to sholat ${x}`);
+      if (x == "fajr") {
+        play("6_Adzan_Subuh.mp3");
+      } else {
+        const file = [
+          "1_Adzan_Masjidil_Haram.mp3",
+          "2_Adzan.mp3",
+          "3_Adzan.mp3",
+          "4_Adzan.mp3",
+          "5_Adzan_Syeikh_Misyari_Rasyid.mp3",
+        ];
+        play(file[Math.floor(Math.random() * 5)]);
+      }
+    });
+    if (x == "fajr") {
+      schedule.scheduleJob(
+        prayerTime.setMinutes(prayerTime.getMinutes() + 10),
+        function () {
+          play("Qunut.mp3");
+        }
+      );
+    }
+  });
 }
 calcPray();
+const dzikir_pagi_time = new Date().setHours(7, 0, 0, 0);
+const dzikir_petang_time = new Date().setHours(16, 30, 0, 0);
+
+function dzikirPagiPlay() {
+  schedule.scheduleJob(dzikir_pagi_time, function () {
+    play("Dzikir_Long.mp3");
+  });
+}
+
+function dzikirPetangPlay() {
+  schedule.scheduleJob(dzikir_petang_time, function () {
+    play("Dzikir_Short.mp3");
+  });
+}
+dzikirPagiPlay();
+dzikirPetangPlay();
 const job = schedule.scheduleJob("1 0 * * *", function () {
   console.log("Calc sholat time");
   calcPray();
+  dzikirPagiPlay();
+  dzikirPetangPlay();
 });
