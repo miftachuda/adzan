@@ -1,8 +1,15 @@
 const player = require("play-sound")();
 const adhan = require("adhan");
 const schedule = require("node-schedule");
+
+const path = require("path");
+
+function findpath(pathname) {
+  return path.join(__dirname, pathname);
+}
+
 function play(file) {
-  player.play(file, (err) => {
+  player.play(findpath(file), (err) => {
     if (err) {
       console.error("Error playing mp3:", err);
     } else {
