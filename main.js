@@ -28,9 +28,19 @@ function calcPray() {
   }
 
   var prayerTimes = new adhan.PrayerTimes(coordinates, date, params);
-  console.log(prayerTimes);
   times.forEach((x) => {
     const prayerTime = new Date(prayerTimes[x]);
+    const options = {
+      timeZone: "Asia/Jakarta", // Replace with your desired timezone
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    };
+    console.log(x, ",", prayerTime.toLocaleString("en-US", options));
     schedule.scheduleJob(prayerTime, function () {
       console.log(`Its time to sholat ${x}`);
       if (x == "fajr") {
