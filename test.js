@@ -1,6 +1,12 @@
 const player = require("play-sound")();
 
 const path = require("path");
+let currentDate = new Date();
+console.log(currentDate);
+// Subtract 70 minutes
+currentDate.setMinutes(currentDate.getMinutes() - 10);
+
+console.log(currentDate);
 
 function findpath(pathname) {
   return path.join(__dirname, pathname);

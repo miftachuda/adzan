@@ -25,18 +25,17 @@ const times = ["fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha"];
 function calcPray() {
   const date = new Date();
 
-  if (date.getDay() === 5) {
-    schedule.scheduleJob(
-      prayerTime.setMinutes(date.setHours(11, 0, 0, 0)),
-      function () {
-        play("Juzz30.mp3");
-      }
-    );
-  }
-
   var prayerTimes = new adhan.PrayerTimes(coordinates, date, params);
   times.forEach((x) => {
     const prayerTime = new Date(prayerTimes[x]);
+    if (date.getDay() === 5 && x === "dhuhr") {
+      schedule.scheduleJob(
+        prayerTime.setMinutes(prayerTime.getMinutes() - 71),
+        function () {
+          play("Juzz30.mp3");
+        }
+      );
+    }
     const options = {
       timeZone: "Asia/Jakarta", // Replace with your desired timezone
       weekday: "long",
