@@ -1,6 +1,4 @@
 node_modules/
-adzan/
-package-lock.json
 Qunut.mp3
 Juzz30.mp3
 Dzikir_Short.mp3
@@ -13,3 +11,4 @@ Al_Waqiah.mp3
 2_Adzan.mp3
 1_Adzan_Masjidil_Haram.mp3
 adzan.mp3
+package-lock.json
