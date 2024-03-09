@@ -47,19 +47,40 @@ function calcPray() {
       second: "numeric",
     };
     console.log(x, ",", prayerTime.toLocaleString("en-US", options));
+    if (x == "fajr") {
+      schedule.scheduleJob(
+        prayerTime.setMinutes(prayerTime.getMinutes() - 30),
+        function () {
+          const file = [
+            "1_Adzan_Masjidil_Haram.mp3",
+            "2_Adzan.mp3",
+            "3_Adzan.mp3",
+            "4_Adzan.mp3",
+            "5_Adzan_Syeikh_Misyari_Rasyid.mp3",
+          ];
+          play(file[Math.floor(Math.random() * 5)]);
+        }
+      );
+    }
+
     schedule.scheduleJob(prayerTime, function () {
       console.log(`Its time to sholat ${x}`);
       if (x == "fajr") {
         play("6_Adzan_Subuh.mp3");
       } else {
         const file = [
-          "1_Adzan_Masjidil_Haram.mp3",
-          "2_Adzan.mp3",
-          "3_Adzan.mp3",
-          "4_Adzan.mp3",
-          "5_Adzan_Syeikh_Misyari_Rasyid.mp3",
+          "Gita Gutawa - Idul Fitri.mp3",
+          "Humood - Kun Anta.mp3",
+          "Maher Zain - Baraka Allahu Lakuma.mp3",
+          "Maher Zain - Rahmatun LilAlameen.mp3",
+          "Tompi - Ramadhan Datang.mp3",
+          "Opick - Tombo Ati.mp3",
+          "Opick - Assalamualaikum.mp3",
+          "Marhaban Ya Ramadhan.mp3",
+          "Maher Zain - Ya Nabi Salam Alayka.mp3",
+          "Maher Zain - Ramadan.mp3",
         ];
-        play(file[Math.floor(Math.random() * 5)]);
+        play(file[Math.floor(Math.random() * 10)]);
       }
     });
     if (x == "fajr") {
@@ -78,7 +99,7 @@ const dzikir_petang_time = new Date().setHours(16, 30, 0, 0);
 
 function dzikirPagiPlay() {
   schedule.scheduleJob(dzikir_pagi_time, function () {
-    play("Dzikir_Long.mp3");
+    play("Dzikir_Short.mp3");
   });
 }
 
