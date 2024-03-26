@@ -28,14 +28,7 @@ function calcPray() {
   var prayerTimes = new adhan.PrayerTimes(coordinates, date, params);
   times.forEach((x) => {
     const prayerTime = new Date(prayerTimes[x]);
-    if (date.getDay() === 5 && x === "dhuhr") {
-      schedule.scheduleJob(
-        prayerTime.setMinutes(prayerTime.getMinutes() - 71),
-        function () {
-          play("Juzz30.mp3");
-        }
-      );
-    }
+
     const options = {
       timeZone: "Asia/Jakarta", // Replace with your desired timezone
       weekday: "long",
@@ -46,8 +39,22 @@ function calcPray() {
       minute: "numeric",
       second: "numeric",
     };
+    if (date.getDay() === 5 && x === "dhuhr") {
+      schedule.scheduleJob(
+        prayerTime.setMinutes(prayerTime.getMinutes() - 71),
+        function () {
+          play("Juzz30.mp3");
+        }
+      );
+    }
     console.log(x, ",", prayerTime.toLocaleString("en-US", options));
     if (x == "fajr") {
+      schedule.scheduleJob(
+        prayerTime.setMinutes(prayerTime.getMinutes() + 5),
+        function () {
+          play("Qunut.mp3");
+        }
+      );
       schedule.scheduleJob(
         prayerTime.setMinutes(prayerTime.getMinutes() - 30),
         function () {
@@ -83,14 +90,6 @@ function calcPray() {
         play(file[Math.floor(Math.random() * 5)]);
       }
     });
-    if (x == "fajr") {
-      schedule.scheduleJob(
-        prayerTime.setMinutes(prayerTime.getMinutes() + 10),
-        function () {
-          play("Qunut.mp3");
-        }
-      );
-    }
   });
 }
 calcPray();
@@ -110,9 +109,9 @@ function dzikirPetangPlay() {
 }
 dzikirPagiPlay();
 dzikirPetangPlay();
-const job = schedule.scheduleJob("1 0 * * *", function () {
-  console.log("Calc sholat time");
-  calcPray();
-  dzikirPagiPlay();
-  dzikirPetangPlay();
-});
+// const job = schedule.scheduleJob("1 0 * * *", function () {
+//   console.log("Calc sholat time");
+//   calcPray();
+//   dzikirPagiPlay();
+//   dzikirPetangPlay();
+// });
