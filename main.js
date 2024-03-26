@@ -108,8 +108,9 @@ function dzikirPetangPlay() {
   });
 }
 dzikirPagiPlay();
-dzikirPetangPlay();
-process.stdin.resume();
+while (true) {
+  // This loop will keep the process running until manually terminated
+}
 // const job = schedule.scheduleJob("1 0 * * *", function () {
 //   console.log("Calc sholat time");
 //   calcPray();
