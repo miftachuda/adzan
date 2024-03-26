@@ -109,6 +109,7 @@ function dzikirPetangPlay() {
 }
 dzikirPagiPlay();
 dzikirPetangPlay();
+process.stdin.resume();
 // const job = schedule.scheduleJob("1 0 * * *", function () {
 //   console.log("Calc sholat time");
 //   calcPray();
